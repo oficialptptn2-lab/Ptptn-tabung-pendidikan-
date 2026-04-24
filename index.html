@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yayasan Pendidikan Harapan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;0,900;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #1a6b3c; --green2: #228b4e; --green-light: #e8f5ee;
+      --gold: #d4a017; --gold-light: #f0c040;
+      --bg: #f5f9f6; --white: #fff; --dark: #0f2d1a;
+      --muted: #6b8a74; --border: #c8ddd0; --text: #1a2e22;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+    .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--green), var(--green2)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .logo-text { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--dark); line-height: 1.2; }
+    .logo-text span { display: block; font-size: 0.62rem; font-weight: 400; color: var(--muted); font-family: 'Nunito', sans-serif; }
+    nav ul { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    nav ul a { font-size: 0.88rem; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    nav ul a:hover { color: var(--green); }
+    .nav-cta { background: var(--green) !important; color: #fff !important; padding: 0.55rem 1.3rem; border-radius: 2rem; }
+    .nav-cta:hover { background: var(--green2) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(150deg, var(--dark) 0%, #1a4a2a 70%, #2d6b3d 100%);
+      display: flex; align-items: center;
+      padding: 8rem 5% 5rem;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,160,23,0.1) 0%, transparent 70%);
+      top: -150px; right: -150px;
+    }
+    .hero-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 2; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.3);
+      color: var(--gold-light); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 2rem; margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.15; letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s 0.25s ease both;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero p {
+      font-size: 1rem; color: rgba(255,255,255,0.6);
+      line-height: 1.8; font-weight: 300;
+      max-width: 520px; margin: 0 auto 2.5rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.55s ease both;
+    }
+    .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); padding: 0.9rem 2rem; border-radius: 2rem; text-decoration: none; font-weight: 800; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(212,160,23,0.35); }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,160,23,0.5); }
+    .btn-white { border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); padding: 0.9rem 2rem; border-radius: 2rem; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: border-color 0.2s, color 0.2s; }
+    .btn-white:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; justify-content: center;
+      margin-top: 3.5rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      animation: fadeUp 0.6s 0.7s ease both;
+    }
+    .hs-num { font-family: 'Merriweather', serif; font-size: 1.9rem; font-weight: 700; color: var(--gold-light); }
+    .hs-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* PROGRAM */
+    .program { padding: 5rem 5%; background: var(--white); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .sec-label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green); display: block; margin-bottom: 0.6rem; }
+    .sec-title { font-family: 'Merriweather', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900; color: var(--dark); letter-spacing: -0.02em; margin-bottom: 0.7rem; }
+    .sec-title em { font-style: italic; color: var(--green); }
+    .sec-sub { color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 480px; margin-bottom: 3rem; }
+
+    .prog-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.2rem; }
+    .prog-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.8rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .prog-card:hover { transform: translateY(-4px); border-color: var(--green); box-shadow: 0 12px 30px rgba(0,0,0,0.07); }
+    .prog-icon { width: 48px; height: 48px; flex-shrink: 0; background: var(--green-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .prog-card h3 { font-family: 'Merriweather', serif; font-size: 0.98rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+    .prog-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+    .prog-badge { display: inline-block; margin-top: 0.7rem; background: var(--green-light); color: var(--green); font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 1rem; }
+
+    /* HUBUNGI */
+    .hubungi { padding: 5rem 5%; background: var(--bg); }
+    .hubungi-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3.5rem; align-items: start; }
+
+    .contact-info h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; font-weight: 900; color: var(--dark); margin-bottom: 0.8rem; }
+    .contact-info p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; font-weight: 300; margin-bottom: 1.8rem; }
+    .cc { display: flex; gap: 0.9rem; align-items: center; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1.1rem; margin-bottom: 0.8rem; }
+    .cc-icon { font-size: 1.2rem; }
+    .cc-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+    .cc-val { font-size: 0.9rem; font-weight: 600; color: var(--dark); }
+
+    .hubungi-form { background: var(--green); border-radius: 20px; padding: 2rem; }
+    .hubungi-form h3 { font-family: 'Merriweather', serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 1.3rem; }
+    .hf { display: flex; flex-direction: column; gap: 0.9rem; }
+    .hf input, .hf select, .hf textarea {
+      background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 10px; padding: 0.7rem 1rem;
+      font-family: 'Nunito', sans-serif; font-size: 0.88rem;
+      color: #fff; outline: none; width: 100%; transition: border-color 0.2s;
+    }
+    .hf input::placeholder, .hf textarea::placeholder { color: rgba(255,255,255,0.4); }
+    .hf input:focus, .hf select:focus, .hf textarea:focus { border-color: var(--gold-light); }
+    .hf select option { color: var(--dark); background: #fff; }
+    .hf textarea { min-height: 90px; resize: vertical; }
+    .hf-btn { background: var(--gold); color: var(--dark); border: none; border-radius: 2rem; padding: 0.85rem 2rem; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 800; cursor: pointer; transition: background 0.2s, transform 0.2s; width: 100%; }
+    .hf-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { background: var(--dark); padding: 2rem 5%; text-align: center; }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    footer span { color: var(--gold-light); }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      nav ul { display: none; }
+      .prog-grid { grid-template-columns: 1fr; }
+      .hubungi-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo-wrap">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">
+      Yayasan Pendidikan Harapan
+      <span>Membina Masa Depan Cerah</span>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#hubungi">Hubungi</a></li>
+    <li><a href="#hubungi" class="nav-cta">Mohon Sekarang</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🌟 Memberi Peluang Sejak 2010</div>
+    <h1>Tabung Pendidikan<br/>untuk <em>Generasi</em> Harapan</h1>
+    <p>Kami komited membantu pelajar cemerlang yang memerlukan sokongan kewangan untuk meneruskan pengajian ke peringkat lebih tinggi.</p>
+    <div class="hero-btns">
+      <a href="#program" class="btn-gold">📋 Lihat Program</a>
+      <a href="#hubungi" class="btn-white">💬 Hubungi Kami</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-num">2,400+</div><div class="hs-lbl">Pelajar Dibantu</div></div>
+      <div><div class="hs-num">RM 8.5J</div><div class="hs-lbl">Tabung Disalurkan</div></div>
+      <div><div class="hs-num">95%</div><div class="hs-lbl">Berjaya Tamat Pengajian</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="program" id="program">
+  <div class="container">
+    <span class="sec-label">Program Bantuan</span>
+    <h2 class="sec-title">Pilih Program <em>Yang Sesuai</em></h2>
+    <p class="sec-sub">Kami menawarkan beberapa jenis bantuan mengikut keperluan dan kelayakan pelajar.</p>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-icon">🏆</div>
+        <div>
+          <h3>Biasiswa Penuh (Merit)</h3>
+          <p>Untuk pelajar cemerlang CGPA 3.5 ke atas. Merangkumi yuran, elaun bulanan dan tempat tinggal.</p>
+          <span class="prog-badge">Sehingga RM 30,000/tahun</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">💰</div>
+        <div>
+          <h3>Bantuan Kewangan (Keperluan)</h3>
+          <p>Untuk pelajar dari keluarga B40. Bantuan yuran pengajian dan sara hidup asas.</p>
+          <span class="prog-badge">Sehingga RM 15,000/tahun</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">📖</div>
+        <div>
+          <h3>Geran Buku & Peralatan</h3>
+          <p>Bantuan pembelian buku teks, laptop dan peralatan pembelajaran untuk pelajar yang memerlukan.</p>
+          <span class="prog-badge">Sehingga RM 3,000</span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">🎯</div>
+        <div>
+          <h3>Program Mentor & Kerjaya</h3>
+          <p>Bimbingan daripada profesional industri, latihan kemahiran dan persediaan kerjaya.</p>
+          <span class="prog-badge">Percuma untuk penerima biasiswa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HUBUNGI -->
+<section class="hubungi" id="hubungi">
+  <div class="container">
+    <div class="hubungi-grid">
+      <div class="contact-info">
+        <span class="sec-label">Hubungi Kami</span>
+        <h2>Ada Soalan?<br/>Kami Sedia Bantu</h2>
+        <p>Pasukan kami akan menjawab setiap pertanyaan anda dalam masa 24 jam bekerja.</p>
+        <div class="cc"><span class="cc-icon">📞</span><div><div class="cc-label">Telefon</div><div class="cc-val">03-1234 5678</div></div></div>
+        <div class="cc"><span class="cc-icon">✉️</span><div><div class="cc-label">E-mel</div><div class="cc-val">info@yayasanharapan.org.my</div></div></div>
+        <div class="cc"><span class="cc-icon">📍</span><div><div class="cc-label">Alamat</div><div class="cc-val">No. 5, Jalan Pendidikan 1, 50480 Kuala Lumpur</div></div></div>
+        <div class="cc"><span class="cc-icon">🕐</span><div><div class="cc-label">Waktu Pejabat</div><div class="cc-val">Isnin – Jumaat: 8:30 pagi – 5:30 petang</div></div></div>
+      </div>
+      <div class="hubungi-form">
+        <h3>Hantar Mesej Kepada Kami</h3>
+        <div class="hf">
+          <input type="text" placeholder="Nama anda"/>
+          <input type="email" placeholder="E-mel anda"/>
+          <select><option value="">-- Topik Pertanyaan --</option><option>Permohonan Biasiswa</option><option>Menjadi Penderma</option><option>Kerjasama / Penajaan</option><option>Lain-lain</option></select>
+          <textarea placeholder="Mesej anda..."></textarea>
+          <button class="hf-btn" onclick="hantar(this)">Hantar Mesej →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 <span>Yayasan Pendidikan Harapan</span>. Semua Hak Terpelihara.</p>
+</footer>
+
+<script>
+  function hantar(btn) {
+    btn.textContent = '✓ Mesej Dihantar!';
+    btn.style.background = '#16a34a';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Hantar Mesej →';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
